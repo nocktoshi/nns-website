@@ -1,0 +1,126 @@
+import { Clock, TrendingUp } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useRecentRegistrations } from "@/hooks/use-queries";
+
+import { getFee } from "@/common";
+
+dayjs.extend(relativeTime);
+
+export default function RecentlyRegistered({
+  limit = 12,
+  variant = "default",
+  className = "",
+}) {
+  const { data: recentRegistrations = [], isFetching } =
+    useRecentRegistrations(limit);
+
+  const gridClassName =
+    variant === "sidebar"
+      ? "grid grid-cols-1 gap-3"
+      : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
+
+  const panelBaseClassName =
+    variant === "sidebar"
+      ? "border-2 glassmorphism web3-glow"
+      : "max-w-6xl mx-auto";
+
+  return (
+    <Card
+      className={`w-full ${panelBaseClassName} ${className}`.trim()}
+    >
+      <CardHeader className={variant === "sidebar" ? "pb-4" : ""}>
+        <CardTitle className="flex items-center gap-2">
+          <TrendingUp className="h-5 w-5 text-primary" />
+          Recently Registered
+          <Badge
+            variant="secondary"
+            className="ml-2 bg-chart-2/20 text-chart-2"
+          >
+            Live Activity
+          </Badge>
+        </CardTitle>
+        <p className="text-sm text-muted-foreground">
+          See what domains others have registered recently for inspiration
+        </p>
+      </CardHeader>
+
+      <CardContent className="p-6 pt-0">
+        {isFetching && (
+          <p className="text-sm text-muted-foreground mb-4">Loading...</p>
+        )}
+        <div className={gridClassName}>
+          {recentRegistrations.map((registration) => (
+            <Card
+              key={registration.id}
+              data-testid={`card-recent-domain-${registration.name}`}
+              className="hover-elevate border glassmorphism"
+            >
+              <CardContent className="p-4">
+                <div className="flex items-start justify-between mb-3">
+                  <h4
+                    className="font-mono font-semibold text-sm truncate"
+                    data-testid={`text-recent-domain-${registration.name}`}
+                  >
+                    {registration.name}
+                  </h4>
+                  {registration.status === "pending" ? (
+                    <Badge
+                      variant="secondary"
+                      className="text-xs bg-yellow-500 text-black border-transparent no-default-hover-elevate"
+                    >
+                      Payment Pending
+                    </Badge>
+                  ) : (
+                    <Badge
+                      variant="default"
+                      className="text-xs bg-chart-2 text-primary-foreground"
+                    >
+                      Registered
+                    </Badge>
+                  )}
+                </div>
+
+                <div className="space-y-2 text-xs">
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Price</span>
+                    <span className="font-mono font-medium">
+                      {getFee(registration.name)} NOCK
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Owner</span>
+                    <span
+                      className="font-mono truncate max-w-20"
+                      title={registration.address || ""}
+                    >
+                      {registration.address?.slice(0, 4)}...
+                      {registration.address?.slice(-4)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-1 pt-1">
+                    <Clock className="h-3 w-3 text-muted-foreground" />
+                    <span className="text-muted-foreground">
+                      {dayjs(registration.timestamp).fromNow()}
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="text-center mt-6">
+          <p className="text-xs text-muted-foreground">
+            Activity updates in real-time as domains are registered on the
+            blockchain
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

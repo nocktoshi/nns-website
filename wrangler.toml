@@ -1,0 +1,9 @@
+name = "nns-website"
+compatibility_date = "2025-07-26"
+routes = [
+  { pattern = "nns.id", custom_domain = true }
+]
+
+[assets]
+directory = "./dist/"
+not_found_handling = "single-page-application"

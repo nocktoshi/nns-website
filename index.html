@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>NNS — Nockchain Name Service</title>
+    <meta name="description" content="NNS is the naming layer for Nockchain. Register human-readable .nock names, resolve addresses, and build on the public API at nns.id." />
+    <meta name="theme-color" content="#0b1020" />
+    <link rel="canonical" href="https://nns.id/" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NNS — Nockchain Name Service" />
+    <meta property="og:url" content="https://nns.id/" />
+    <meta property="og:title" content="NNS — Nockchain Name Service" />
+    <meta property="og:description" content="Human-readable .nock names for any Nockchain address. Register, resolve, and build on the public NNS API at nns.id." />
+    <meta property="og:image" content="https://nns.id/og-image.png" />
+    <meta property="og:image:secure_url" content="https://nns.id/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1376" />
+    <meta property="og:image:height" content="768" />
+    <meta property="og:image:alt" content="NNS — Nockchain Name Service. Human-readable .nock names for any Nockchain address." />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@nocktoshi" />
+    <meta name="twitter:creator" content="@nocktoshi" />
+    <meta name="twitter:url" content="https://nns.id/" />
+    <meta name="twitter:title" content="NNS — Nockchain Name Service" />
+    <meta name="twitter:description" content="Human-readable .nock names for any Nockchain address. Register, resolve, and build on the public NNS API at nns.id." />
+    <meta name="twitter:image" content="https://nns.id/og-image.png" />
+    <meta name="twitter:image:alt" content="NNS — Nockchain Name Service. Human-readable .nock names for any Nockchain address." />
+
+    <style>
+      #app-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(1200px 800px at 50% 20%, rgba(246, 169, 58, 0.14), transparent 60%),
+                    radial-gradient(1000px 700px at 20% 80%, rgba(61, 227, 212, 0.12), transparent 55%),
+                    hsl(225 45% 7%);
+        transition: opacity 320ms ease, visibility 320ms ease;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #app-loader.fade-out {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      #app-loader .wrap {
+        display: grid;
+        place-items: center;
+        gap: 18px;
+      }
+
+      #app-loader .brand-mark {
+        width: auto;
+        height: 80px;
+        max-width: min(70vw, 360px);
+        object-fit: contain;
+        filter: drop-shadow(0 0 24px rgba(246, 169, 58, 0.45))
+          drop-shadow(0 0 48px rgba(61, 227, 212, 0.2));
+        animation: nns-pulse 2.2s ease-in-out infinite;
+      }
+
+      #app-loader .sub {
+        font: 500 12px/1.2 "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      @keyframes nns-pulse {
+        0%, 100% { filter: brightness(1) saturate(1); transform: scale(1); }
+        50% { filter: brightness(1.1) saturate(1.1); transform: scale(1.02); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app-loader" aria-label="Loading">
+      <div class="wrap">
+        <img class="brand-mark" src="/nns-mark.png" alt="NNS — Nockchain Name Service" />
+        <div class="sub">Nockchain Name Service</div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
