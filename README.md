@@ -3,7 +3,7 @@
 The human-readable naming layer for Nockchain. Register, resolve, and manage
 `.nock` names at [nns.id](https://nns.id).
 
-![NNS](src/assets/nns-logo.png)
+![NNS](public/og-image.png)
 
 ## Stack
 

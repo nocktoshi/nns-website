@@ -120,7 +120,7 @@ export default function Home() {
   const handleCopyQuickstart = async () => {
     try {
       await navigator.clipboard.writeText(
-        "curl 'https://api.nns.id/resolve?name=logan.nock'"
+        "curl 'https://api.nocknames.com/resolve?name=logan.nock'"
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 1200);
@@ -456,7 +456,7 @@ export default function Home() {
               </span>
             </div>
             <code className="bg-background px-2 py-1 rounded text-xs font-mono inline-block">
-              nocknames.nock =&gt;
+              nns.nock =&gt;
               8s29XUK8Do7QWt2MHfPdd1gDSta6db4c3bQrxP1YdJNfXpL3WPzTT5
             </code>
             <div>
