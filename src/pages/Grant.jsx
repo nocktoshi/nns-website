@@ -540,10 +540,12 @@ export default function Grant() {
               wallet, dApp, and user interaction on Nockchain.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <a href="https://t.me/nocktoshi" target="_blank" rel="noreferrer">
               <Button size="lg" className="gap-2 web3-gradient border-0">
                 <ExternalLink className="h-4 w-4" />
                 Contact on Telegram
               </Button>
+              </a>
               <Link href="/">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Zap className="h-4 w-4" />
@@ -575,7 +577,7 @@ export default function Grant() {
       <footer className="border-t border-border">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center text-sm text-muted-foreground">
-            <p>&copy; 2026 NNS. Built on Nockchain.</p>
+            <p>&copy; 2026 nockchain.net, LLC. Built on Nockchain.</p>
           </div>
         </div>
       </footer>

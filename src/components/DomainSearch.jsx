@@ -38,9 +38,6 @@ export default function DomainSearch({ onSearch, isLoading = false }) {
           </Button>
         </div>
       </form>
-      <p className="text-center text-sm text-muted-foreground mt-4">
-        Enter a name to check availability and secure your .nock name
-      </p>
     </div>
   );
 }

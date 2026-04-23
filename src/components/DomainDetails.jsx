@@ -18,7 +18,7 @@ export default function DomainDetails({
   const statusBadgeClassName = isPending
     ? "bg-yellow-500 text-black border-transparent no-default-hover-elevate"
     : isRegistered
-      ? "bg-chart-2 text-primary-foreground border-transparent"
+      ? "bg-muted text-muted-foreground border-transparent opacity-60 no-default-hover-elevate cursor-not-allowed"
       : undefined;
   const statusLabel = isPending
     ? "Payment Pending"

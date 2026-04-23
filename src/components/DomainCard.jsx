@@ -38,8 +38,8 @@ export default function DomainCard({
     }
     return (
       <Badge
-        variant="default"
-        className="bg-chart-2 text-primary-foreground hover-elevate"
+        variant="secondary"
+        className="bg-muted text-muted-foreground border-transparent opacity-60 no-default-hover-elevate cursor-not-allowed"
       >
         <Check className="h-3 w-3 mr-1" />
         Registered

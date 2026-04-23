@@ -777,7 +777,7 @@ export default function Developers() {
 
       <footer className="border-t border-border">
         <div className="container mx-auto px-4 py-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2026 NNS. Built on Nockchain.</p>
+          <p>&copy; 2026 nockchain.net, LLC. Built on Nockchain.</p>
         </div>
       </footer>
     </div>
