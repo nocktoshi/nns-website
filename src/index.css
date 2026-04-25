@@ -421,6 +421,20 @@
     border: 1px solid hsla(var(--border), 0.4);
   }
 
+  /* In-dialog ARCHITECTURE.md: Mermaid SVG scales with content column. */
+  .architecture-mermaid svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .architecture-mermaid .actor,
+  .architecture-mermaid .messageText,
+  .architecture-mermaid .loopText,
+  .architecture-mermaid .noteText {
+    font-family: var(--font-sans) !important;
+  }
+
   /* Subtle circuit-trace texture used behind hero/section dividers. */
   .nns-circuit-bg {
     background-image:

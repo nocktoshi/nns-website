@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -13,11 +14,13 @@ import {
   ExternalLink,
 } from "lucide-react";
 
+import ArchitectureDocDialog from "@/components/ArchitectureDocDialog";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import logoMark from "@/assets/nns-mark.png";
+import nocktoshiAvatar from "@/assets/nocktoshi-avatar.png";
 import {
   Table,
   TableBody,
@@ -44,8 +47,8 @@ const milestones = [
     id: "M2",
     title: "Core NNS Protocol",
     deliverables: [
-      "Implement NNS protocol (name registration, ownership, memo support in raw txs)",
-      "Implement transferability (memo-based ownership transfer)",
+      "Implement NNS protocol: chain-ordered claims on Nockchain as sequencer, deterministic kernel replay, name registration and ownership",
+      "Transferability (memo-based ownership transfer) aligned with canonical claim ordering",
     ],
     timeline: "Weeks 5–12",
     funding: "1,750,000",
@@ -68,7 +71,7 @@ const milestones = [
     title: "API & Infrastructure",
     deliverables: [
       "Production resolver API (address ↔ .nock lookup)",
-      "Resolver infrastructure supporting memo-based resolution",
+      "Proof-capable infrastructure: verifiable claim bundles, anchor binding, and wallet-side verification patterns (light clients trust Nockchain, not a single NNS host)",
       "Public docs, SDKs, and wallet integration examples (Iris Wallet first)",
     ],
     timeline: "Weeks 19–22",
@@ -81,7 +84,7 @@ const milestones = [
     deliverables: [
       "Full mainnet launch + community marketing push",
       "Security review and audit",
-      "Open-source everything + governance handover to Nockchain ecosystem",
+      "Open-source everything + governance handover so NNS remains ecosystem-owned infrastructure",
     ],
     timeline: "Weeks 23–24",
     funding: "300,000",
@@ -93,7 +96,10 @@ const budgetBreakdown = [
   { item: "Domain acquisition & branding", amount: "120,000" },
   { item: "NNS protocol development & testing", amount: "1,750,000" },
   { item: "Marketplace frontend + escrow services", amount: "1,450,000" },
-  { item: "Resolver API, infrastructure & hosting (first year)", amount: "900,000" },
+  {
+    item: "Resolver API, proof/serving infrastructure & hosting (first year)",
+    amount: "900,000",
+  },
   { item: "Security review and audit", amount: "470,000" },
   { item: "Community launch, docs & marketing", amount: "170,000" },
   { item: "Contingency & misc (wallets, legal setup)", amount: "140,000" },
@@ -119,28 +125,30 @@ const impacts = [
   },
   {
     icon: Shield,
-    title: "Ecosystem Differentiation",
+    title: "Public-good naming",
     description:
-      'Positions Nockchain as the "ENS of zkPoW" — a key primitive missing today.',
+      "Like ENS for Ethereum, NNS is infrastructure for verifying who owns a .nock name — open, inspectable, and reusable by every wallet and app on Nockchain.",
   },
 ];
 
 const risks = [
   {
-    risk: "Technical risk (Nockchain ZKVM quirks)",
-    mitigation: "Early testing on testnet + community feedback on Telegram/Discord",
+    risk: "Technical risk (Nockchain ZKVM dependencies)",
+    mitigation: "Early testing on dumbnet + community feedback on X/Telegram",
   },
   {
     risk: "Security risk",
-    mitigation: "Full open-source + professional review before mainnet launch",
+    mitigation: "Full open-source + professional security audit before general launch",
   },
   {
     risk: "Adoption risk",
-    mitigation: "Phased rollout + marketing tied to existing nocknames.com users",
+    mitigation: "Phased rollout + marketing and cross pollination with existing communities",
   },
 ];
 
 export default function Grant() {
+  const [architectureOpen, setArchitectureOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background no-default-hover-elevate">
       <header className="border-b border-border">
@@ -183,7 +191,7 @@ export default function Grant() {
             Nockchain Naming System (NNS)
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Full Protocol, Marketplace, and Infrastructure for the Nockchain Ecosystem
+            A rollup-centric naming system and public resolver for Nockchain
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -203,7 +211,7 @@ export default function Grant() {
 
           <div className="text-sm text-muted-foreground">
             <span className="font-medium">Submitted by:</span> smoothiepool aka{" "}
-            <span className="font-mono">@nocktoshi</span> • March 30, 2026
+            <span className="font-mono">@nocktoshi</span> • April 25, 2026
           </div>
         </div>
       </section>
@@ -220,27 +228,48 @@ export default function Grant() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                The Nock Naming System (NNS) will become the{" "}
+                The Nockchain Naming System (NNS) aims to become the{" "}
                 <span className="text-foreground font-medium">
-                  official human-readable naming layer
+                  human-readable naming and verification layer
                 </span>{" "}
-                for Nockchain. It translates raw Nockchain addresses into memorable{" "}
-                <span className="font-mono text-primary">.nock</span> domains (e.g.,{" "}
-                <span className="font-mono">logan.nock</span>), enabling seamless identity,
-                transfers, and on-chain interactions.
+                for Nockchain. Framed as a{" "}
+                <span className="text-foreground font-medium">public good</span> for name
+                resolution, much like ENS does for Ethereum, it maps raw addresses to memorable{" "}
+                <span className="font-mono text-primary">.nock</span> names (e.g.,{" "}
+                <span className="font-mono">logan.nock</span>) so users, wallets, and apps can
+                send, display, and verify identity without trusting a single operator's
+                database.
               </p>
               <p>
-                Building directly on the existing community project{" "}
-                <span className="font-medium text-foreground">nocknames.com</span> (already
-                live with basic registration), this grant funds:
+                Architecturally, NNS follows a{" "}
+                <span className="text-foreground font-medium">
+                  decentralized, rollup-centric model
+                </span>
+                :{" "}
+                <span className="font-medium text-foreground">Nockchain sequences claims</span>{" "}
+                in canonical block order; every node replays the same ordered inputs into a
+                deterministic registry; and{" "}
+                <span className="font-medium text-foreground">
+                  STARK proofs plus wallet-checked anchors
+                </span>{" "}
+                let light clients verify names against the chain they already trust — not an NNS
+                HTTP server. That shape benefits the{" "}
+                <span className="text-foreground font-medium">entire ecosystem</span>: any
+                wallet, explorer, or future rollup on Nockchain can adopt the same verification
+                surface instead of bespoke, siloed name services.
+              </p>
+              <p>
+                Building on the community project{" "}
+                <span className="font-medium text-foreground">nocknames.com</span> (already live
+                with basic registration), this grant funds:
               </p>
               <ul className="space-y-2 pl-4">
                 {[
                   "Secure branding via nns.id domain acquisition",
                   "A full .nock domain marketplace with listing and escrow",
-                  "Production-grade resolver API and infrastructure",
-                  "Core NNS protocol development (memo support in raw transactions + transferability)",
-                  "Native transferability of .nock names",
+                  "Production-grade resolver API, proof serving, and operator infrastructure",
+                  "Core NNS protocol: chain-ordered claims, deterministic state, memo paths in raw txs, and transferability",
+                  "Wallet and SDK oriented verification (proof bundles, anchor freshness, integration examples)",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-chart-2 mt-1 shrink-0" />
@@ -249,8 +278,8 @@ export default function Grant() {
                 ))}
               </ul>
               <p>
-                NNS will drive user adoption, developer tooling, and ecosystem growth on
-                Nockchain — the zkPoW L1 for programmable gold and private applications.
+                NNS accelerates every layer that touches identity: onboarding, payments,
+                explorers, and apps all benifit. Nockchain is the zkPoW L1 for programmable gold and NNS is its naming system. Nockchain's naming system should be shared with everyone, not captured by any single entity.
               </p>
             </CardContent>
           </Card>
@@ -266,20 +295,36 @@ export default function Grant() {
           </h2>
           <div className="space-y-4 text-muted-foreground">
             <p>
-              Nockchain is live on mainnet and already features a budding ecosystem of
-              wallets, explorers, and early DeFi primitives. However, it lacks a robust,
-              production-ready naming system.
+              Nockchain is live on mainnet with a growing ecosystem of wallets, explorers, and
+              early applications. What it still lacks is production-grade naming that is both
+              easy for humans and{" "}
+              <span className="text-foreground font-medium">cryptographically accountable</span>{" "}
+              to the chain.
             </p>
             <p>
               The community-built{" "}
               <span className="font-medium text-foreground">nocknames.com</span> has proven
-              demand: users can search and claim .nock names today.
+              demand: users can search and claim .nock names today using the centralized service.
             </p>
             <p>
-              This proposal upgrades nocknames.com into the{" "}
-              <span className="font-medium text-foreground">official NNS protocol</span> — a
-              secure, transferable, and memo-based naming layer purpose-built for
-              Nockchain's ZKVM architecture.
+              This proposal evolves that work into the{" "}
+              <span className="font-medium text-foreground">canonical NNS protocol</span>:{" "}
+              <span className="text-foreground font-medium">Nockchain as sequencer</span> for
+              claims (no separate validator set), deterministic replay for one global registry
+              view, and a{" "}
+              <span className="text-foreground font-medium">zkRollup-style proof path</span> so
+              wallets verify names with Nockchain final ordering and proofs. (Nockchain ordering, Vesl/STARK verification, anchor freshness for fork
+                and staleness resistance) It is not blind faith in a single NNS server. 
+                </p>
+                <p>
+                Detailed design decisions are documented in the project's {" "}
+              <button
+                type="button"
+                onClick={() => setArchitectureOpen(true)}
+                className="inline font-medium text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary/90 hover:decoration-primary"
+              >
+                architecture reference
+              </button>{" "} on GitHub. 
             </p>
           </div>
         </div>
@@ -296,9 +341,9 @@ export default function Grant() {
             {[
               "Secure long-term branding and trust with a dedicated NNS domain.",
               "Launch a user-friendly .nock marketplace with built-in escrow for safe secondary trading.",
-              "Deliver reliable, decentralized resolution infrastructure (API + resolver).",
-              "Fully develop and deploy the NNS protocol, including memo support in raw transactions and transferability of .nock names.",
-              "Enable true transferability of .nock names (one-click ownership transfer on Nockchain).",
+              "Ship decentralized, rollup-centric resolution: chain-ordered claims, verifiable proofs, resolver and light-client surfaces so the ecosystem shares one verification story.",
+              "Complete the NNS protocol on Nockchain including STARK proofs, transferability, and canonical claim ordering and settlement.",
+              "Make NNS easy to adopt as public-good infrastructure: docs, SDKs, and reference integrations so every wallet and app benefits.",
             ].map((objective, i) => (
               <Card key={i} className="glassmorphism web3-glow-hover">
                 <CardContent className="flex items-start gap-4 p-4">
@@ -421,19 +466,23 @@ export default function Grant() {
           <Card className="glassmorphism web3-glow-hover">
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-chart-3 flex items-center justify-center text-2xl font-bold text-white shrink-0">
-                  S
-                </div>
+                <img
+                  src={nocktoshiAvatar}
+                  alt="smoothiepool (@nocktoshi)"
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 shrink-0 rounded-full border-2 border-border object-cover shadow-sm ring-2 ring-primary/20"
+                />
                 <div className="space-y-2">
                   <h3 className="text-lg font-bold">
-                    smoothiepool aka{" "}
-                    <span className="font-mono text-primary">@nocktoshi</span>
+                    
+                    <span className="font-mono text-primary"><a href="https://x.com/nocktoshi" target="_blank" rel="noreferrer">@nocktoshi</a></span> aka smoothiepool
                   </h3>
                   <p className="text-muted-foreground">
                     Creator of the original{" "}
                     <span className="font-medium text-foreground">nocknames.com</span>{" "}
                     (live since July 2025) and sole proposer. Experienced full-stack
-                    developer with prior on-chain projects. Will handle all development,
+                    engineer with prior on-chain projects. Will handle all development,
                     protocol implementation, and community coordination.
                   </p>
                   <p className="text-sm text-muted-foreground">
@@ -533,11 +582,13 @@ export default function Grant() {
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Request is for{" "}
               <span className="font-bold text-foreground">5,000,000 $NOCK</span> from the
-              NockFund platform to deliver a complete, production-ready NNS in 6 months.
+              Flock platform to deliver a complete, production-ready NNS in 6 months.
             </p>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              This is a high-leverage investment: one naming system will accelerate every
-              wallet, dApp, and user interaction on Nockchain.
+              This is a high-leverage investment: one naming and verification stack — anchored
+              on Nockchain and designed like a rollup for the registry — accelerates every
+              wallet, dApp, and user interaction, with benefits that compound across the
+              ecosystem.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <a href="https://t.me/nocktoshi" target="_blank" rel="noreferrer">
@@ -546,15 +597,15 @@ export default function Grant() {
                 Contact on Telegram
               </Button>
               </a>
-              <Link href="/">
+              <Link href="https://github.com/nocktoshi/nns-vesl">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Zap className="h-4 w-4" />
-                  Try NNS
+                  GitHub
                 </Button>
               </Link>
             </div>
             <div className="text-lg font-medium web3-gradient-text">
-              Let's make .nock the standard identity layer for programmable gold.
+              Let's make .nock the shared, verifiable identity layer for programmable gold.
             </div>
           </Card>
         </div>
@@ -581,6 +632,8 @@ export default function Grant() {
           </div>
         </div>
       </footer>
+
+      <ArchitectureDocDialog open={architectureOpen} onOpenChange={setArchitectureOpen} />
     </div>
   );
 }
