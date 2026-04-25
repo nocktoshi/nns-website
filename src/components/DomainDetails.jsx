@@ -212,10 +212,12 @@ export default function DomainDetails({
               Complete Payment
             </Button>
           ) : domain.owner ? (
-            <Button variant="outline" className="gap-2">
-              <Clock className="h-4 w-4" />
-              Transaction History
-            </Button>
+            <a href={`https://nockblocks.com/address/${domain.owner}?tab=transactions`} target="_blank" rel="noreferrer">
+              <Button variant="outline" className="gap-2">
+                <Clock className="h-4 w-4" />
+                Transaction History
+              </Button>
+            </a>
           ) : null}
 
           {isAvailable && (

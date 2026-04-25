@@ -210,8 +210,8 @@ export default function Grant() {
           </div>
 
           <div className="text-sm text-muted-foreground">
-            <span className="font-medium">Submitted by:</span> smoothiepool aka{" "}
-            <span className="font-mono">@nocktoshi</span> • April 25, 2026
+            <span className="font-medium">Submitted by: </span> 
+            <span className="font-mono"><a href="https://x.com/nocktoshi" target="_blank" rel="noreferrer">@nocktoshi</a></span> • April 25, 2026
           </div>
         </div>
       </section>

@@ -139,7 +139,7 @@ export default function Lookup() {
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-semibold mb-2">Domain Information</h3>
                   <p className="text-muted-foreground">
-                    Results for domain "<span className="font-mono">{lookupQuery.data.query}</span>"
+                    Results for "<span className="font-mono">{lookupQuery.data.query}</span>"
                   </p>
                 </div>
                 <DomainDetails
