@@ -537,10 +537,9 @@ export default function Developers() {
             NNS API
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">
-            A small JSON API for resolving, searching, and registering{" "}
+            A restful JSON API for resolving, searching, and registering{" "}
             <span className="font-mono text-primary">.nock</span> names on
-            Nockchain. No authentication. CORS enabled. Powered by a Cloudflare
-            Worker.
+            Nockchain. No authentication. CORS enabled. STARK proofs coming soon!
           </p>
 
           <div className="grid md:grid-cols-[1fr_1.2fr] gap-4">
