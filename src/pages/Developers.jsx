@@ -32,10 +32,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import logoMark from "@/assets/nns-mark.png";
+import {
+  API_DOCS_BASE_URL,
+  API_DOCS_PAYMENT_ADDRESS,
+  API_DOCS_DEMO_NAME,
+  apiDocsEndpoints,
+  apiDocsQuickstartSnippets,
+} from "@/config/apiEndpoints";
 
-const API_BASE = "https://api.nocknames.com";
-const PAYMENT_ADDRESS = "8s29XUK8Do7QWt2MHfPdd1gDSta6db4c3bQrxP1YdJNfXpL3WPzTT5";
-const DEMO_NAME = "nocktoshi.nock";
+const API_BASE = API_DOCS_BASE_URL;
+const PAYMENT_ADDRESS = API_DOCS_PAYMENT_ADDRESS;
+const DEMO_NAME = API_DOCS_DEMO_NAME;
 
 function methodClasses(method) {
   switch (method) {
@@ -144,180 +151,7 @@ function ParamTable({ rows }) {
   );
 }
 
-const endpoints = [
-  {
-    id: "resolve",
-    method: "GET",
-    path: "/resolve",
-    description:
-      "Bidirectional resolution: name → address or address → name. Provide exactly one of name or address.",
-    params: [
-      {
-        name: "name",
-        type: "string",
-        description: "Full .nock domain, e.g. logan.nock. Must match /^[a-z0-9]+\\.nock$/.",
-      },
-      {
-        name: "address",
-        type: "string",
-        description: "Nockchain wallet address (base58).",
-      },
-    ],
-    examples: [
-      {
-        label: "name → address",
-        request: `curl '${API_BASE}/resolve?name=logan.nock'`,
-        response: `{\n  "address": "8s29XUK8Do7QWt2MHfPdd1gDSta6db4c3bQrxP1YdJNfXpL3WPzTT5"\n}`,
-        status: 200,
-      },
-      {
-        label: "address → name",
-        request: `curl '${API_BASE}/resolve?address=8s29XUK8Do7QWt2MHfPdd1gDSta6db4c3bQrxP1YdJNfXpL3WPzTT5'`,
-        response: `{\n  "name": "logan.nock"\n}`,
-        status: 200,
-      },
-      {
-        label: "Not found",
-        request: `curl '${API_BASE}/resolve?name=notfound.nock'`,
-        response: `{\n  "error": "Name not registered"\n}`,
-        status: 404,
-      },
-    ],
-  },
-  {
-    id: "search",
-    method: "GET",
-    path: "/search",
-    description:
-      "Check availability and status for a name, or list all registrations for an address.",
-    params: [
-      {
-        name: "name",
-        type: "string",
-        description: "Label or full .nock domain. Both 'logan' and 'logan.nock' are accepted.",
-      },
-      {
-        name: "address",
-        type: "string",
-        description: "Wallet address — returns all pending and verified registrations for it.",
-      },
-    ],
-    examples: [
-      {
-        label: "Search a name",
-        request: `curl '${API_BASE}/search?name=logan.nock'`,
-        response: `{\n  "name": "logan.nock",\n  "price": 500,\n  "status": "registered",\n  "owner": "8s29XU...TT5",\n  "registeredAt": 1730000000000\n}`,
-        status: 200,
-      },
-      {
-        label: "Search by address",
-        request: `curl '${API_BASE}/search?address=8s29XUK8Do7QWt2MHfPdd1gDSta6db4c3bQrxP1YdJNfXpL3WPzTT5'`,
-        response: `{\n  "address": "8s29XU...TT5",\n  "pending": [\n    { "address": "...", "name": "soon.nock", "status": "pending", "timestamp": 1730000000000 }\n  ],\n  "verified": [\n    {\n      "address": "...",\n      "name": "logan.nock",\n      "status": "registered",\n      "timestamp": 1730000000000,\n      "date": "2026-01-01T00:00:00.000Z",\n      "txHash": "..."\n    }\n  ]\n}`,
-        status: 200,
-      },
-    ],
-  },
-  {
-    id: "pending",
-    method: "GET",
-    path: "/pending",
-    description: "List all pending registrations, most recent first.",
-    params: [],
-    examples: [
-      {
-        label: "Request",
-        request: `curl '${API_BASE}/pending'`,
-        response: `[\n  {\n    "address": "8s29XU...TT5",\n    "name": "logan.nock",\n    "status": "pending",\n    "timestamp": 1730000000000\n  }\n]`,
-        status: 200,
-      },
-    ],
-  },
-  {
-    id: "verified",
-    method: "GET",
-    path: "/verified",
-    description: "List all registered (verified) names, most recent first.",
-    params: [],
-    examples: [
-      {
-        label: "Request",
-        request: `curl '${API_BASE}/verified'`,
-        response: `[\n  {\n    "address": "8s29XU...TT5",\n    "name": "logan.nock",\n    "status": "registered",\n    "timestamp": 1730000000000,\n    "date": "2026-01-01T00:00:00.000Z",\n    "txHash": "..."\n  }\n]`,
-        status: 200,
-      },
-    ],
-  },
-  {
-    id: "register",
-    method: "POST",
-    path: "/register",
-    description:
-      "Create a payment-pending registration reserving a name for an address. The client has 7 days to send the fee on-chain to the NNS payment address and call /verify — otherwise the reservation is released and the name becomes available again.",
-    body: [
-      {
-        name: "address",
-        type: "string",
-        required: true,
-        description: "Nockchain wallet address that will own the name.",
-      },
-      {
-        name: "name",
-        type: "string",
-        required: true,
-        description: "Lowercase alphanumeric label ending in .nock.",
-      },
-    ],
-    examples: [
-      {
-        label: "Request",
-        request: `curl -X POST '${API_BASE}/register' \\\n  -H 'Content-Type: application/json' \\\n  -d '{"address":"8s29XU...TT5","name":"logan.nock"}'`,
-        response: `{\n  "address": "8s29XU...TT5",\n  "name": "logan.nock",\n  "status": "pending"\n}`,
-        status: 200,
-      },
-      {
-        label: "Validation error",
-        request: `# invalid name`,
-        response: `{\n  "error": "Name must be alphanumeric lowercase and end with .nock"\n}`,
-        status: 400,
-      },
-    ],
-  },
-  {
-    id: "verify",
-    method: "POST",
-    path: "/verify",
-    description:
-      "Verify the on-chain payment and finalize registration. Scans for an unused payment transaction from the provided address that pays at least the required fee to the NNS payment address.",
-    body: [
-      {
-        name: "address",
-        type: "string",
-        required: true,
-        description: "The same address used in /register.",
-      },
-      {
-        name: "name",
-        type: "string",
-        required: true,
-        description: "The .nock name to finalize.",
-      },
-    ],
-    examples: [
-      {
-        label: "Success",
-        request: `curl -X POST '${API_BASE}/verify' \\\n  -H 'Content-Type: application/json' \\\n  -d '{"address":"8s29XU...TT5","name":"logan.nock"}'`,
-        response: `{\n  "message": "Registration successful!",\n  "registration": {\n    "address": "8s29XU...TT5",\n    "name": "logan.nock",\n    "status": "registered",\n    "timestamp": 1730000000000,\n    "date": "2026-01-01T00:00:00.000Z",\n    "txHash": "..."\n  }\n}`,
-        status: 200,
-      },
-      {
-        label: "No payment found",
-        request: `# no matching tx on-chain yet`,
-        response: `{\n  "error": "No valid payment transaction found for this address."\n}`,
-        status: 400,
-      },
-    ],
-  },
-];
+const endpoints = apiDocsEndpoints;
 
 const pricing = [
   { rule: "Label length ≥ 10 characters", fee: "100 $NOCK" },
@@ -331,20 +165,7 @@ const errorCodes = [
   { code: 500, meaning: "Internal Server Error", examples: "Unexpected server failure; includes an error string in the body." },
 ];
 
-const quickstartSnippets = {
-  curl: `curl '${API_BASE}/resolve?name=logan.nock'`,
-  javascript: `const res = await fetch(
-  '${API_BASE}/resolve?name=logan.nock'
-);
-const { address } = await res.json();
-console.log(address);`,
-  node: `import { request } from 'undici';
-
-const { body } = await request(
-  '${API_BASE}/resolve?name=logan.nock'
-);
-const { address } = await body.json();`,
-};
+const quickstartSnippets = apiDocsQuickstartSnippets;
 
 function LiveResolveDemo() {
   const [state, setState] = useState({ status: "loading", data: null, error: null });
@@ -514,6 +335,12 @@ export default function Developers() {
             </Link>
 
             <div className="flex items-center gap-3">
+              <Link href="/playground">
+                <Button className="gap-2 web3-gradient text-white border-0">
+                  <Terminal className="h-4 w-4" />
+                  Playground
+                </Button>
+              </Link>
               <Link href="/">
                 <Button variant="outline" className="gap-2">
                   <ArrowLeft className="h-4 w-4" />

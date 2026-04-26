@@ -11,7 +11,7 @@ The human-readable naming layer for Nockchain. Register, resolve, and manage
 - Tailwind CSS 4 with a custom navy / orange / teal neon palette
 - Cloudflare Workers (static asset serving via Wrangler)
 - `@nockchain/sdk` + Rose wallet for on-chain payments
-- Public resolver API at `https://api.nns.id`
+- Public resolver API at `https://testnet.nns.id`
 
 ## Develop
 
@@ -34,3 +34,9 @@ npm run deploy:preview   # preview version
 
 - Protocol & milestones: [/grant](https://nns.id/grant)
 - API reference: [/developers](https://nns.id/developers)
+- API playground (testnet): [/playground](https://nns.id/playground)
+
+## Environment
+
+- `VITE_API_URL`: main website API base URL.
+- `VITE_TESTNET_API_URL`: playground-only API base URL (defaults to `https://testnet.nns.id`).

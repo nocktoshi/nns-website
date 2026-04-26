@@ -36,6 +36,15 @@ export default defineConfig(() => {
         strict: true,
         deny: ["**/.*"],
       },
+      /** Playground: same-origin proxy so `npm run dev` avoids browser CORS when testnet + nginx both emit CORS headers (`*, *` duplicate). */
+      proxy: {
+        "/__playground-testnet": {
+          target: "https://testnet.nns.id",
+          changeOrigin: true,
+          secure: true,
+          rewrite: (p) => p.replace(/^\/__playground-testnet/, "") || "/",
+        },
+      },
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
           if (req.url?.endsWith(".wasm")) {

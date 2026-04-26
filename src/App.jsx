@@ -5,6 +5,7 @@ import MyNock from "@/pages/MyNock";
 import Upgrade from "@/pages/Upgrade";
 import Grant from "@/pages/Grant";
 import Developers from "@/pages/Developers";
+import ApiPlayground from "@/pages/ApiPlayground";
 import NotFound from "@/pages/not-found";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/grant" component={Grant} />
       <Route path="/developers" component={Developers} />
       <Route path="/api" component={Developers} />
+      <Route path="/playground" component={ApiPlayground} />
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
