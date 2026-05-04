@@ -188,7 +188,7 @@ export default function Grant() {
             Flock Proposal
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 web3-gradient-text">
-            Nockchain Naming System (NNS)
+            Nockchain Name Service (NNS)
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             A rollup-centric naming system and public resolver for Nockchain
@@ -228,7 +228,7 @@ export default function Grant() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                The Nockchain Naming System (NNS) aims to become the{" "}
+                The Nockchain Name Service (NNS) aims to become the{" "}
                 <span className="text-foreground font-medium">
                   human-readable naming and verification layer
                 </span>{" "}
