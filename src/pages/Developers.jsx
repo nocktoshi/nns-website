@@ -317,7 +317,7 @@ function Endpoint({ endpoint }) {
 export default function Developers() {
   return (
     <div className="min-h-screen bg-background no-default-hover-elevate">
-      <header className="border-b border-border sticky top-0 z-40 bg-background/80 backdrop-blur">
+      <header className="border-b border-border sticky top-0 z-40 bg-background/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
@@ -336,7 +336,7 @@ export default function Developers() {
 
             <div className="flex items-center gap-3">
               <Link href="/playground">
-                <Button className="gap-2 web3-gradient text-white border-0">
+                <Button className="gap-2 web3-gradient text-primary-foreground border-0">
                   <Terminal className="h-4 w-4" />
                   Playground
                 </Button>
@@ -356,7 +356,7 @@ export default function Developers() {
       {/* Hero */}
       <section className="py-16 px-4 border-b border-border nns-circuit-bg">
         <div className="container mx-auto max-w-5xl">
-          <Badge className="mb-4 web3-gradient text-white border-0">
+          <Badge className="mb-4 web3-gradient text-primary-foreground border-0 uppercase tracking-[0.12em] text-[10px]">
             <Code2 className="h-3 w-3 mr-1" />
             API Reference
           </Badge>

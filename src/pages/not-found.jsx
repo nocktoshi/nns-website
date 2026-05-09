@@ -13,7 +13,7 @@ export default function NotFound() {
             <img
               src={logoMark}
               alt="NNS"
-              className="h-14 w-auto object-contain drop-shadow-[0_0_24px_rgba(246,169,58,0.35)]"
+              className="h-14 w-auto object-contain drop-shadow-md"
             />
           </div>
           <div className="flex items-center justify-center gap-2">
@@ -25,7 +25,7 @@ export default function NotFound() {
             a <span className="font-mono">.nock</span> name.
           </p>
           <Link href="/">
-            <Button className="gap-2 web3-gradient border-0">
+            <Button className="gap-2 web3-gradient border-0 text-primary-foreground">
               <ArrowLeft className="h-4 w-4" />
               Back to NNS
             </Button>

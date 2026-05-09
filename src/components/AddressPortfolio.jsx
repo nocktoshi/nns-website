@@ -53,7 +53,7 @@ export default function AddressPortfolio({ address, domains, onRegister }) {
               <div className="text-sm text-muted-foreground">Registered</div>
             </div>
             <div className="text-center p-4 bg-muted rounded-lg">
-              <div className="text-2xl font-bold text-yellow-500">
+              <div className="text-2xl font-bold text-amber-800 dark:text-amber-950">
                 {pendingCount}
               </div>
               <div className="text-sm text-muted-foreground">Pending</div>
@@ -76,7 +76,7 @@ export default function AddressPortfolio({ address, domains, onRegister }) {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Globe className="h-5 w-5" />
-              My .nock
+              My Names
               <Badge variant="secondary" className="ml-2">
                 {domains.length} {domains.length === 1 ? "domain" : "domains"}
               </Badge>

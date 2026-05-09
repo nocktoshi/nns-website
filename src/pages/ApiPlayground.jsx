@@ -424,7 +424,7 @@ console.log(data);`;
 
   return (
     <div className="min-h-screen bg-background no-default-hover-elevate">
-      <header className="border-b border-border sticky top-0 z-40 bg-background/80 backdrop-blur">
+      <header className="border-b border-border sticky top-0 z-40 bg-background/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
@@ -583,7 +583,7 @@ console.log(data);`;
                       type="button"
                       onClick={onSend}
                       disabled={isSending}
-                      className="h-9 shrink-0 gap-2 whitespace-nowrap web3-gradient text-white border-0 sm:px-4"
+                      className="h-9 shrink-0 gap-2 whitespace-nowrap web3-gradient text-primary-foreground border-0 sm:px-4"
                     >
                       {isSending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}
                       Send request

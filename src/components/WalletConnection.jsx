@@ -111,6 +111,11 @@ const WalletConnection = ({ provider, onAccountChange }) => {
     );
   }
 
+  const walletIconClass =
+    walletType === "iris"
+      ? "w-4 h-4 flex-shrink-0 brightness-0 invert"
+      : "w-4 h-4 flex-shrink-0";
+
   if (!provider) {
     const walletName = walletType === 'iris' ? 'Iris' : 'Rose';
     const iconSrc = walletType === 'iris' ? IRIS_ICON : rose32;
@@ -118,12 +123,12 @@ const WalletConnection = ({ provider, onAccountChange }) => {
     return (
       <Button
         disabled
-        className="web3-gradient border-0 text-white opacity-60 cursor-not-allowed"
+        className="web3-gradient border-0 text-primary-foreground opacity-60 cursor-not-allowed uppercase tracking-[0.1em] text-xs font-bold no-default-hover-elevate"
       >
         <img
           src={iconSrc}
           alt={walletName}
-          className="w-4 h-4 flex-shrink-0"
+          className={walletIconClass}
         />
         Loading {walletName}...
       </Button>
@@ -135,7 +140,7 @@ const WalletConnection = ({ provider, onAccountChange }) => {
       {account ? (
         <>
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 web3-gradient web3-glow rounded-full flex items-center justify-center text-xs font-bold text-white shadow-sm">
+            <div className="w-8 h-8 web3-gradient web3-glow rounded-full flex items-center justify-center text-xs font-bold text-primary-foreground shadow-sm">
               {account.slice(-4)}
             </div>
             <span className="text-sm font-medium truncate max-w-[120px]">
@@ -156,12 +161,12 @@ const WalletConnection = ({ provider, onAccountChange }) => {
           <Button
             onClick={handleConnect}
             disabled={isConnecting}
-            className="web3-gradient web3-glow-hover border-0 text-white"
+            className="web3-gradient web3-glow-hover border-0 text-primary-foreground uppercase tracking-[0.1em] text-xs font-bold no-default-hover-elevate no-default-active-elevate transition-colors hover:!bg-[#333333]"
           >
             <img
               src={walletType === 'iris' ? IRIS_ICON : rose32}
               alt="Wallet Connect"
-              className="w-4 h-4 flex-shrink-0"
+              className={walletIconClass}
             />
             {isConnecting
               ? "Connecting..."

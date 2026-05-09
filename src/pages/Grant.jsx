@@ -151,7 +151,7 @@ export default function Grant() {
 
   return (
     <div className="min-h-screen bg-background no-default-hover-elevate">
-      <header className="border-b border-border">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
@@ -184,7 +184,7 @@ export default function Grant() {
       {/* Hero Section */}
       <section className="py-16 px-4 border-b border-border nns-circuit-bg">
         <div className="container mx-auto max-w-4xl text-center">
-          <Badge className="mb-4 web3-gradient text-white border-0">
+          <Badge className="mb-4 web3-gradient text-primary-foreground border-0 uppercase tracking-[0.12em] text-[10px]">
             Flock Proposal
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 web3-gradient-text">
@@ -378,7 +378,7 @@ export default function Grant() {
                     </div>
                     <div className="flex items-center gap-4 text-sm">
                       <span className="text-muted-foreground">{milestone.timeline}</span>
-                      <Badge className="web3-gradient text-white border-0">
+                      <Badge className="web3-gradient text-primary-foreground border-0">
                         {milestone.funding} $NOCK
                       </Badge>
                     </div>
@@ -468,7 +468,7 @@ export default function Grant() {
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <img
                   src={nocktoshiAvatar}
-                  alt="smoothiepool (@nocktoshi)"
+                  alt="@nocktoshi"
                   width={64}
                   height={64}
                   className="h-16 w-16 shrink-0 rounded-full border-2 border-border object-cover shadow-sm ring-2 ring-primary/20"
@@ -476,7 +476,7 @@ export default function Grant() {
                 <div className="space-y-2">
                   <h3 className="text-lg font-bold">
                     
-                    <span className="font-mono text-primary"><a href="https://x.com/nocktoshi" target="_blank" rel="noreferrer">@nocktoshi</a></span> aka smoothiepool
+                    <span className="font-mono text-primary"><a href="https://x.com/nocktoshi" target="_blank" rel="noreferrer">@nocktoshi</a></span>
                   </h3>
                   <p className="text-muted-foreground">
                     Creator of the original{" "}
@@ -592,7 +592,7 @@ export default function Grant() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <a href="https://t.me/nocktoshi" target="_blank" rel="noreferrer">
-              <Button size="lg" className="gap-2 web3-gradient border-0">
+              <Button size="lg" className="gap-2 web3-gradient border-0 text-primary-foreground">
                 <ExternalLink className="h-4 w-4" />
                 Contact on Telegram
               </Button>
@@ -615,7 +615,7 @@ export default function Grant() {
       <section className="py-8 px-4 border-t border-border">
         <div className="container mx-auto max-w-4xl text-center">
           <p className="text-muted-foreground">
-            — smoothiepool
+            @nocktoshi
             <br />
             <span className="font-mono text-primary">@nocktoshi</span> on X and Telegram
             <br />

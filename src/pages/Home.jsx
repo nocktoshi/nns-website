@@ -26,10 +26,10 @@ import {
   useAddressPortfolioQuery,
 } from "@/hooks/use-queries";
 import { useWallet } from "@/hooks/use-wallet";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import logoMark from "@/assets/nns-mark.png";
+import { scrollWindowTop } from "@/lib/utils";
 
 const HOW_IT_WORKS = [
   {
@@ -92,6 +92,7 @@ export default function Home() {
 
   const handleSearch = async (domain) => {
     setSearchTerm(domain);
+    scrollWindowTop();
   };
 
   const handleRegister = (domain) => {
@@ -131,50 +132,40 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background no-default-hover-elevate">
       {/* Header */}
-      <header className="border-b border-border">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-[2px]">
+        <div className="container mx-auto px-4 py-3 md:py-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <Link href="/" className="flex items-center gap-3 shrink-0">
               <img
                 src={logoMark}
                 alt="NNS — Nockchain Name Service"
-                className="h-10 w-auto object-contain"
+                className="h-9 w-auto object-contain md:h-10"
               />
-              <Badge className="mb-4 web3-gradient text-white border-0 text-xs">
-                Beta
-              </Badge>
+              <span className="pill-label">Beta</span>
             </Link>
 
-            <div className="flex items-center gap-3">
-              <Link href="/lookup">
-                <Button
-                  variant="outline"
-                  className="gap-2"
-                  data-testid="button-navigate-lookup"
-                >
-                  <Search className="h-4 w-4" />
-                  Lookup
-                </Button>
+            <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2">
+              <Link
+                href="/lookup"
+                className="nav-bracket"
+                data-testid="button-navigate-lookup"
+              >
+                <Search className="h-3.5 w-3.5 opacity-70" />
+                Lookup
               </Link>
-              <Link href="/grant">
-                <Button variant="outline" className="gap-2">
-                  <FileText className="h-4 w-4" />
-                  Grant
-                </Button>
+              <Link href="/grant" className="nav-bracket">
+                <FileText className="h-3.5 w-3.5 opacity-70" />
+                Grant
               </Link>
-              <Link href="/developers">
-                <Button variant="outline" className="gap-2">
-                  <Code2 className="h-4 w-4" />
-                  API Docs
-                </Button>
+              <Link href="/developers" className="nav-bracket">
+                <Code2 className="h-3.5 w-3.5 opacity-70" />
+                API Docs
               </Link>
 
               {connectedAccount && (
-                <Link href="/my-nock">
-                  <Button variant="outline" className="gap-2">
-                    <Wallet className="h-4 w-4" />
-                    My .nock
-                  </Button>
+                <Link href="/my-nock" className="nav-bracket">
+                  <Wallet className="h-3.5 w-3.5 opacity-70" />
+                  My Names
                 </Link>
               )}
               <ThemeToggle />
@@ -222,18 +213,26 @@ export default function Home() {
             <div className="text-center">
               {searchResults.length === 0 && (
                 <>
-                  <div className="flex justify-center mb-8">
+                  <div className="flex justify-center mb-6">
                     <img
                       src={logoMark}
                       alt="Nockchain Name Service"
-                      className="h-24 w-24 md:h-28 md:w-28 rounded-2xl object-contain shadow-2xl web3-glow"
+                      className="h-16 w-16 md:h-20 md:w-20 rounded-md object-contain shadow-md ring-1 ring-border"
                     />
                   </div>
 
-                  <h1 className="text-4xl md:text-5xl font-bold mb-5 web3-gradient-text leading-tight">
+                  <p className="font-label text-muted-foreground mb-5">
                     Nockchain Name Service
+                  </p>
+                  <h1 className="mb-5 leading-[1.02] text-center">
+                    <span className="font-display block text-5xl md:text-8xl tracking-tight text-foreground">
+                      .NOCK
+                    </span>
+                    <span className="font-display block text-2xl md:text-5xl tracking-tight text-muted-foreground mt-2">
+                      NAMES
+                    </span>
                   </h1>
-                  <p className="text-base md:text-lg text-muted-foreground mb-8 mx-auto lg:mx-0">
+                  <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
                     Human-readable{" "}
                     <span className="font-mono text-foreground">.nock</span>{" "}
                     names that resolve to any Nockchain address. Register
@@ -324,9 +323,7 @@ export default function Home() {
       <section className="py-16 px-4 border-t border-border bg-muted/20">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-12">
-            <Badge variant="outline" className="mb-3">
-              Protocol
-            </Badge>
+            <p className="font-label text-muted-foreground mb-3">Features</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">
               How NNS works
             </h2>
@@ -379,10 +376,10 @@ export default function Home() {
             <CardContent className="p-8 md:p-10">
               <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 items-center">
                 <div>
-                  <Badge className="mb-3 web3-gradient text-white border-0">
-                    <Code2 className="h-3 w-3 mr-1" />
+                  <span className="pill-label mb-3 inline-flex items-center gap-1.5">
+                    <Code2 className="h-3 w-3" />
                     Build on NNS
-                  </Badge>
+                  </span>
                   <h2 className="text-3xl md:text-4xl font-bold mb-3">
                     One HTTP call away
                   </h2>
@@ -394,7 +391,7 @@ export default function Home() {
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Link href="/developers">
-                      <Button className="gap-2 web3-gradient border-0">
+                      <Button className="gap-2 web3-gradient border-0 text-primary-foreground uppercase tracking-[0.1em] text-xs font-bold no-default-hover-elevate no-default-active-elevate enabled:hover:!bg-[#333333]">
                         <Code2 className="h-4 w-4" />
                         Read the API docs
                         <ArrowRight className="h-4 w-4" />
@@ -423,7 +420,7 @@ export default function Home() {
                     type="button"
                     onClick={handleCopyQuickstart}
                     aria-label="Copy quickstart"
-                    className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-md border border-border bg-background/80 px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                    className="absolute top-2 right-2 inline-flex cursor-pointer items-center gap-1 rounded-md border border-border bg-background/80 px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {copied ? (
                       <>

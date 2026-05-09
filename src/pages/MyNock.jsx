@@ -59,7 +59,7 @@ export default function MyNock() {
   return (
     <div className="min-h-screen bg-background no-default-hover-elevate">
       {/* Header */}
-      <header className="border-b border-border">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -70,7 +70,7 @@ export default function MyNock() {
               </Link>
               <div className="flex items-center gap-2">
                 <Wallet className="h-5 w-5 text-primary" />
-                <h1 className="text-xl font-bold">My .nock</h1>
+                <h1 className="text-xl font-bold">My Names</h1>
               </div>
               <Badge variant="secondary" className="text-xs cursor-pointer">
                 Beta

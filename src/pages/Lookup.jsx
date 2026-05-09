@@ -12,6 +12,7 @@ import { useRegistrationFlow } from "@/hooks/use-registration-flow";
 import { useWallet } from "@/hooks/use-wallet";
 import ThemeToggle from "@/components/ThemeToggle";
 import WalletConnection from "@/components/WalletConnection";
+import { scrollWindowTop } from "@/lib/utils";
 
 export default function Lookup() {
   const rose = useWallet();
@@ -38,6 +39,7 @@ export default function Lookup() {
     console.log(`Looking up ${type}: ${query}`);
     try {
       setParams({ query, type });
+      scrollWindowTop();
     } catch (e) {
       console.error("Lookup failed", e);
       setError("Lookup failed. Please try again.");
@@ -71,7 +73,7 @@ export default function Lookup() {
   return (
     <div className="min-h-screen bg-background no-default-hover-elevate">
       {/* Header */}
-      <header className="border-b border-border">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -137,7 +139,7 @@ export default function Lookup() {
             {lookupQuery.data.type === 'domain' ? (
               <div className="space-y-4">
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-semibold mb-2">Domain Information</h3>
+                  <h3 className="text-2xl font-semibold mb-2">.Nock Information</h3>
                   <p className="text-muted-foreground">
                     Results for "<span className="font-mono">{lookupQuery.data.query}</span>"
                   </p>

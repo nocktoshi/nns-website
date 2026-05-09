@@ -503,7 +503,7 @@ export default function Upgrade() {
 
   return (
     <div className="min-h-screen bg-background no-default-hover-elevate">
-      <header className="border-b border-border">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -527,12 +527,12 @@ export default function Upgrade() {
 
       <main className="container mx-auto px-4 py-10 max-w-3xl">
         <Card className="p-6 space-y-6">
-          <Alert className="border-yellow-300/60 bg-yellow-50 text-yellow-900 dark:bg-yellow-950/30 dark:text-yellow-100">
+          <Alert className="border-amber-800/35 bg-amber-100/90 text-foreground shadow-sm dark:border-amber-900/45 dark:bg-amber-200/40">
             <AlertTitle>Experimental</AlertTitle>
             <AlertDescription>
               This upgrade flow is experimental. You must use the <span className="font-medium">Rose Wallet</span> and have your v0 seedphrase stored in Rose Wallet.
               {walletType === 'iris' && (
-                <span className="block mt-2 font-medium text-yellow-800 dark:text-yellow-200">
+                <span className="block mt-2 font-medium text-amber-950">
                   ⚠️ Iris does not support the required v0 signing methods. Please install Rose Wallet for v0 migration support.
                 </span>
               )}
@@ -586,7 +586,7 @@ export default function Upgrade() {
           )}
 
           {isMethodNotSupported && (
-            <Alert className="border-yellow-300/60 bg-yellow-50 text-yellow-900 dark:bg-yellow-950/30 dark:text-yellow-100">
+            <Alert className="border-amber-800/35 bg-amber-100/90 text-foreground shadow-sm dark:border-amber-900/45 dark:bg-amber-200/40">
               <AlertTitle>No Support for v0 Migration</AlertTitle>
               <AlertDescription className="space-y-2">
                 <div>
@@ -627,7 +627,7 @@ export default function Upgrade() {
           )}
 
           {isNoVault && (
-            <Alert className="border-yellow-300/60 bg-yellow-50 text-yellow-900 dark:bg-yellow-950/30 dark:text-yellow-100">
+            <Alert className="border-amber-800/35 bg-amber-100/90 text-foreground shadow-sm dark:border-amber-900/45 dark:bg-amber-200/40">
               <AlertTitle>Extension Not Initialized</AlertTitle>
               <AlertDescription className="space-y-2">
                 <div>

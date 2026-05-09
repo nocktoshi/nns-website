@@ -29,7 +29,8 @@ export default function PricingCard({ className = "" }) {
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between gap-3">
           <div className="space-y-1">
-            <CardTitle className="flex items-center gap-2">
+            <p className="font-label text-muted-foreground">Pricing / year</p>
+            <CardTitle className="flex items-center gap-2 pt-1">
               <Tag className="h-5 w-5 text-primary" />
               Pricing
             </CardTitle>

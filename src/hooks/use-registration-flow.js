@@ -258,7 +258,7 @@ export function useRegistrationFlow({ provider, rpcClient }) {
         setStatus(STATUSES.failed);
         setStatusText(
           "Error during transaction: " +
-          (error?.response?.data?.error ?? error.message ?? String(error))
+          (error?.response?.data?.error ?? error.message ?? String(error)) + " (try reloading extension)"
         );
         return { ok: false, error };
       } finally {

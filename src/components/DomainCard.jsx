@@ -18,7 +18,7 @@ export default function DomainCard({
       return (
         <Badge
           variant="default"
-          className="bg-chart-2 text-primary-foreground hover-elevate"
+          className="border-transparent bg-chart-2 text-white shadow-xs cursor-default transition-colors hover:bg-emerald-900/90 hover:text-white"
         >
           <Check className="h-3 w-3 mr-1" />
           Available
@@ -29,7 +29,7 @@ export default function DomainCard({
       return (
         <Badge
           variant="secondary"
-          className="bg-yellow-500 text-black border-transparent no-default-hover-elevate"
+          className="cursor-default border-transparent bg-yellow-500 text-black transition-colors hover:bg-yellow-600 hover:text-black"
         >
           <Clock className="h-3 w-3 mr-1" />
           Pending
@@ -39,7 +39,7 @@ export default function DomainCard({
     return (
       <Badge
         variant="secondary"
-        className="bg-muted text-muted-foreground border-transparent opacity-60 no-default-hover-elevate cursor-not-allowed"
+        className="cursor-default border border-dashed border-border bg-muted/90 text-muted-foreground opacity-90 transition-colors hover:border-border hover:bg-muted hover:text-muted-foreground"
       >
         <Check className="h-3 w-3 mr-1" />
         Registered
@@ -101,7 +101,7 @@ export default function DomainCard({
         {isAvailable ? (
           <Button
             data-testid={`button-register-${domain.name}`}
-            className="w-full"
+            className="w-full no-default-hover-elevate no-default-active-elevate enabled:hover:!bg-[#333333]"
             onClick={() => onRegister(domain)}
             disabled={isRegistering || isRegisterDisabled}
           >
@@ -132,7 +132,7 @@ export default function DomainCard({
             </Button>
             <Button
               data-testid={`button-complete-payment-${domain.name}`}
-              className="w-full sm:flex-1 min-w-0 whitespace-normal leading-tight"
+              className="w-full sm:flex-1 min-w-0 whitespace-normal leading-tight no-default-hover-elevate no-default-active-elevate enabled:hover:!bg-[#333333] transition-colors"
               onClick={() => onRegister(domain)}
               disabled={isRegistering || isRegisterDisabled}
             >

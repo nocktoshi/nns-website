@@ -69,14 +69,14 @@ export default function RecentlyRegistered({
                   {registration.status === "pending" ? (
                     <Badge
                       variant="secondary"
-                      className="text-xs bg-yellow-500 text-black border-transparent no-default-hover-elevate"
+                      className="cursor-default border-transparent bg-yellow-500 text-xs text-black transition-colors hover:bg-yellow-600 hover:text-black"
                     >
                       Payment Pending
                     </Badge>
                   ) : (
                     <Badge
                       variant="default"
-                      className="text-xs bg-chart-2 text-primary-foreground"
+                      className="cursor-default border-transparent bg-chart-2 text-xs text-white shadow-xs transition-colors hover:bg-emerald-900/90 hover:text-white"
                     >
                       Registered
                     </Badge>

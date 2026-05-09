@@ -16,10 +16,10 @@ export default function DomainDetails({
   const isRegistered = status === "registered";
   const canRegister = typeof onRegister === "function";
   const statusBadgeClassName = isPending
-    ? "bg-yellow-500 text-black border-transparent no-default-hover-elevate"
+    ? "cursor-default border-transparent bg-yellow-500 text-black transition-colors hover:bg-yellow-600 hover:text-black"
     : isRegistered
-      ? "bg-muted text-muted-foreground border-transparent opacity-60 no-default-hover-elevate cursor-not-allowed"
-      : undefined;
+      ? "cursor-default border border-dashed border-border bg-muted/90 text-muted-foreground opacity-90 transition-colors hover:border-border hover:bg-muted hover:text-muted-foreground"
+      : "border-transparent bg-chart-2 text-white shadow-xs cursor-default transition-colors hover:bg-emerald-900/90 hover:text-white";
   const statusLabel = isPending
     ? "Payment Pending"
     : isRegistered
@@ -81,7 +81,7 @@ export default function DomainDetails({
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Status</span>
                 <Badge
-                  variant={isAvailable ? "outline" : "default"}
+                  variant={isAvailable ? "default" : "secondary"}
                   className={statusBadgeClassName}
                 >
                   {statusLabel}
@@ -204,7 +204,7 @@ export default function DomainDetails({
           )}
           {isPending && domain.owner ? (
             <Button
-              className="gap-2"
+              className="gap-2 no-default-hover-elevate no-default-active-elevate enabled:hover:!bg-[#333333] transition-colors"
               onClick={() => onRegister?.(domain)}
               disabled={!canRegister || isRegistering || isRegisterDisabled}
               data-testid={`button-complete-payment-${domain.name}`}
@@ -222,7 +222,7 @@ export default function DomainDetails({
 
           {isAvailable && (
             <Button
-              className="gap-2"
+              className="gap-2 no-default-hover-elevate no-default-active-elevate enabled:hover:!bg-[#333333]"
               onClick={() => onRegister?.(domain)}
               disabled={!canRegister || isRegistering || isRegisterDisabled}
               data-testid={`button-register-${domain.name}`}

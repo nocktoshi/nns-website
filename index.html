@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>NNS — Nockchain Name Service</title>
     <meta name="description" content="NNS is the naming layer for Nockchain. Register human-readable .nock names, resolve addresses, and build on the public API at nns.id." />
-    <meta name="theme-color" content="#0b1020" />
+    <meta name="theme-color" content="#cecec9" />
     <link rel="canonical" href="https://nns.id/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -42,9 +49,13 @@
         z-index: 9999;
         display: grid;
         place-items: center;
-        background: radial-gradient(1200px 800px at 50% 20%, rgba(246, 169, 58, 0.14), transparent 60%),
-                    radial-gradient(1000px 700px at 20% 80%, rgba(61, 227, 212, 0.12), transparent 55%),
-                    hsl(225 45% 7%);
+        background-color: hsl(60 7% 81%);
+        background-image:
+          linear-gradient(hsla(0, 0%, 10%, 0.055) 0.5px, transparent 0.5px),
+          linear-gradient(90deg, hsla(0, 0%, 10%, 0.055) 0.5px, transparent 0.5px),
+          radial-gradient(1100px 720px at 50% -5%, rgba(255, 255, 255, 0.45), transparent 58%);
+        background-size: 100px 100px, 100px 100px, auto;
+        background-position: center top;
         transition: opacity 320ms ease, visibility 320ms ease;
         opacity: 1;
         visibility: visible;
@@ -66,16 +77,16 @@
         height: 80px;
         max-width: min(70vw, 360px);
         object-fit: contain;
-        filter: drop-shadow(0 0 24px rgba(246, 169, 58, 0.45))
-          drop-shadow(0 0 48px rgba(61, 227, 212, 0.2));
+        filter: drop-shadow(0 2px 14px rgba(25, 25, 26, 0.12))
+          drop-shadow(0 0 1px rgba(25, 25, 26, 0.08));
         animation: nns-pulse 2.2s ease-in-out infinite;
       }
 
       #app-loader .sub {
-        font: 500 12px/1.2 "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font: 500 12px/1.2 "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.45);
+        color: rgba(26, 26, 26, 0.48);
       }
 
       @keyframes nns-pulse {
