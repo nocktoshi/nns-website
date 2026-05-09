@@ -319,6 +319,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section className="py-16 px-4 border-t border-border no-default-hover-elevate">
+        <div className="container mx-auto">
+          <div className="max-w-3xl mx-auto">
+            <PricingCard />
+          </div>
+        </div>
+      </section>
+
       {/* How NNS works */}
       <section className="py-16 px-4 border-t border-border bg-muted/20">
         <div className="container mx-auto max-w-5xl">
@@ -356,15 +365,6 @@ export default function Home() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-16 px-4 no-default-hover-elevate">
-        <div className="container mx-auto">
-          <div className="max-w-3xl mx-auto">
-            <PricingCard />
           </div>
         </div>
       </section>
