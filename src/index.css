@@ -493,6 +493,46 @@
     backdrop-filter: none;
   }
 
+  /* ARCHITECTURE.md viewer — ink-on-paper code (overrides tailwind typography / prose-invert) */
+  .architecture-doc pre,
+  .architecture-doc-pre {
+    background: hsl(var(--muted)) !important;
+    color: hsl(var(--foreground)) !important;
+    box-shadow: inset 0 1px 2px rgba(25, 25, 26, 0.06);
+  }
+
+  .architecture-doc pre code,
+  .architecture-doc-pre code {
+    display: block;
+    background: transparent !important;
+    color: hsl(var(--foreground)) !important;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    white-space: pre;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .architecture-doc :not(pre) > code {
+    background: hsl(var(--muted)) !important;
+    color: hsl(var(--foreground)) !important;
+    border: 1px solid hsl(var(--border));
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+  }
+
+  .architecture-doc pre::selection,
+  .architecture-doc pre code::selection,
+  .architecture-doc-pre::selection,
+  .architecture-doc-pre code::selection {
+    background: hsl(var(--foreground) / 0.18);
+    color: hsl(var(--foreground));
+  }
+
   /* In-dialog ARCHITECTURE.md: Mermaid SVG scales with content column. */
   .architecture-mermaid svg {
     max-width: 100%;

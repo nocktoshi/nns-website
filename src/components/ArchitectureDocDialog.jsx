@@ -179,7 +179,7 @@ function MarkdownPre({ children, dark }) {
   }
 
   return (
-    <pre className="not-prose mb-4 overflow-x-auto rounded-lg border border-border bg-muted/40 p-4 text-sm leading-relaxed">
+    <pre className="architecture-doc-pre not-prose mb-4 overflow-x-auto rounded-lg border border-border bg-muted p-4 text-sm leading-relaxed text-foreground">
       {children}
     </pre>
   );
@@ -246,7 +246,13 @@ export default function ArchitectureDocDialog({ open, onOpenChange }) {
           );
         }
         return (
-          <code className={cn("font-mono text-sm", className)} {...rest}>
+          <code
+            className={cn(
+              "block font-mono text-sm leading-relaxed text-foreground whitespace-pre",
+              className
+            )}
+            {...rest}
+          >
             {children}
           </code>
         );
@@ -354,7 +360,9 @@ export default function ArchitectureDocDialog({ open, onOpenChange }) {
                   "prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground",
                   "prose-hr:border-border",
                   "prose-li:text-muted-foreground prose-li:marker:text-primary",
-                  "dark:prose-invert dark:prose-p:text-muted-foreground"
+                  /* Site .dark = paper surface — do not use prose-invert (breaks fenced code) */
+                  "prose-pre:bg-transparent prose-pre:p-0 prose-pre:shadow-none",
+                  "prose-code:text-foreground prose-code:bg-transparent prose-code:font-normal prose-code:before:content-none prose-code:after:content-none"
                 )}
               >
                 <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
